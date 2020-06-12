@@ -22,8 +22,9 @@ def batch_rename(work_dir, old_ext, new_ext):
     # files = os.listdir(work_dir)
     for filename in os.listdir(work_dir):
         # Get the file extension
-        split_file = os.path.splitext(filename)
-        # Unpack tuple element
+        split_file = os.path.splitext(filename)  
+        # 分离 文件名 与 拓展名
+        # Unpack tuple element, like the 1.jpg is splited into   1 and .jpg
         root_name, file_ext = split_file
         # Start of the logic to check the file extensions, if old_ext = file_ext
         if old_ext == file_ext:
@@ -38,11 +39,12 @@ def batch_rename(work_dir, old_ext, new_ext):
     print("rename is done!")
     print(os.listdir(work_dir))
 
+# change extension of files in a working directory
+# 命令行操作时会用到的 提示指令
 
 def get_parser():
     parser = argparse.ArgumentParser(description='change extension of files in a working directory')
-    parser.add_argument('work_dir', metavar='WORK_DIR', type=str, nargs=1,
-                        help='the directory where to change extension')
+    parser.add_argument('work_dir', metavar='WORK_DIR', type=str, nargs=1,help='the directory where to change extension')
     parser.add_argument('old_ext', metavar='OLD_EXT', type=str, nargs=1, help='old extension')
     parser.add_argument('new_ext', metavar='NEW_EXT', type=str, nargs=1, help='new extension')
     return parser
@@ -58,10 +60,14 @@ def main():
 
     # Set the variable work_dir with the first argument passed
     work_dir = args['work_dir'][0]
+    
     # Set the variable old_ext with the second argument passed
+    # only the file with old extnesion name  will be renamed by the  batch_rename(work_dir, old_ext, new_ext) function
+    # I changew the py file and it is useless
     old_ext = args['old_ext'][0]
     if old_ext[0] != '.':
         old_ext = '.' + old_ext
+    
     # Set the variable new_ext with the third argument passed
     new_ext = args['new_ext'][0]
     if new_ext[0] != '.':
